@@ -57,6 +57,19 @@ BSTMethods.contains = function(value) {
 
 };
 
+
+//depth first traversal
+
+/*
+e.g
+       4
+    3       8
+  2   5   7     9
+
+  DFS traversal will be:
+  4,3,2,5,8,7,9;
+this problem can also be solved using stack.
+*/
 BSTMethods.depthFirstLog = function(callback, currNode) {
   currNode = currNode || this;
   callback(currNode.value);
@@ -67,6 +80,41 @@ BSTMethods.depthFirstLog = function(callback, currNode) {
   if (currNode.right) {
     currNode.depthFirstLog(callback, currNode.right);
   }
+
+};
+
+
+
+
+
+//level order traversal
+/*
+e.g
+       4
+    3       8
+  2   5   7     9
+
+  BFS traversal will be:
+  4,3,8,2,5,7,9;
+this problem can  be solved using queue.
+*/
+BSTMethods.breadthFirstLog = function (callback, currNode) {
+  currNode = currNode || this;
+  var queue = [];
+  queue.push(currNode);
+  while (queue.length > 0) {
+    currNode = queue.shift();
+    callback(currNode.value);
+    if (currNode.left) {
+      queue.push(currNode.left);
+    }
+    if (currNode.right) {
+      queue.push(currNode.right);
+    }
+
+
+  }
+
 
 };
 

@@ -20,6 +20,12 @@ describe('graph', function() {
     expect(graph.contains(1)).to.equal(true);
   });
 
+  it('should do nothing if removeNode method is called for a node that does not exist in a graph', function() {
+    graph.addNode(1);
+    graph.removeNode(3);
+    expect(graph).to.equal(graph);
+  });
+
   it('should remove nodes that were inserted', function() {
     graph.addNode(2);
     expect(graph.contains(2)).to.equal(true);

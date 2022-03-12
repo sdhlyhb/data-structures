@@ -31,6 +31,13 @@ describe('linkedList', function() {
     expect(linkedList.head.value).to.equal(5);
   });
 
+  it('should set tail to null if removeHead is called on a list with one element', function() {
+    linkedList.addToTail(4);
+    expect(linkedList.head.value).to.equal(4);
+    linkedList.removeHead();
+    expect(linkedList.tail).to.equal(null);
+  });
+
   it('should return the value of the former head when removeHead is called', function() {
     linkedList.addToTail(4);
     expect(linkedList.removeHead()).to.equal(4);
