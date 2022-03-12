@@ -87,70 +87,37 @@ HashTable.prototype.resize = function(_newLimit) {
   var _oldStorage = this._storage;
   this._limit = _newLimit; // new limit
   this._storage = LimitedArray(_newLimit); //new storage
+  var _newStorage = this._storage;
   var testArray = [];
   //loop through the old storage to get every tuple and re-assign them to the new array (new storage);
-  // _oldStorage.each( function(bucket, index, array) {
-  //   // if (bucket) {
-  //   //   for (var i = 0; i < bucket.length; i ++) {
-  //   //     //this.insert(bucket[i][0], bucket[i][1]);
-  //   //     var curTuple = bucket[i];
-  //   //     var curKey = curTuple[0];
-  //   //     var curValue = curTuple[1];
-  //   //     var newIndex = getIndexBelowMaxForKey(curKey, this._limit)
-  //   //     var newBucket = this._storage.get(newIndex);
-  //   //     // if (!newBucket) {
-  //       // this._storage.set(newIndex,[[curKey, curValue]]);
-  //       // } else {
-  //       // var found = false;
-  //       // for (var m = 0; m < newBucket.length; m ++) {
-  //       //   if (newBucket[m][0] === curKey) {
-  //       //         newBucket[m][1] = curValue;
-  //       //         found = true;
-  //       //       }
-  //       //     }
-  //       //     if (!found) {
-  //       //       newBucket.push([curKey, curValue]);
+  _oldStorage.each( function(bucket, index, storage) {
+    if (bucket) {
+      for (var j = 0; j < bucket.length; j++) {
+        var curTuple = bucket[j];
+        var curKey = curTuple[0];
+        var curValue = curTuple[1];
+        var newIndex = getIndexBelowMaxForKey(curKey, _newLimit);
+        var newBucket = _newStorage.get(newIndex);
+        if (!newBucket) {
+          _newStorage.set(newIndex, [[curKey, curValue]]);
+        } else {
+          var found = false;
+          for (var m = 0; m < newBucket.length; m++) {
+            if (newBucket[m][0] === curKey) {
+              newBucket[m][1] = curValue;
+              founc = true;
+            }
+          }
+          if (!found) {
+            newBucket.push([curKey, curValue]);
+          }
+        }
 
-  //       //     }
-
-
-  //       //   }
-  //     }
-  //   // }
-  // });
-
-  // for (var oldIndex in _oldStorage) {
-  //   if (Number(oldIndex)) {
-  //     var bucket = _oldStorage[oldIndex];
-  //     if (bucket) {
-  //       for (var j = 0; j < bucket.length; j++) {
-  //         var curTuple = bucket[j];
-  //         var curKey = curTuple[0];
-  //         var curValue = curTuple[1];
-  //         //get the new hash index;
-  //         var newIndex = getIndexBelowMaxForKey(curKey, this._limit);
-  //         // similar method as insert to reassign the tuple to the new hashtable
-  //         var newBucket = this._storage[newIndex];
-  //         if (!newBucket) {
-  //           this._storage[newIndex] = [[curKey, curValue]];
-  //         } else {
-  //           var found = false;
-  //           for (var m = 0; m < newBucket.length; m ++) {
-  //             if (newBucket[m][0] === curKey) {
-  //               newBucket[m][1] = curValue;
-  //               found = true;
-  //             }
-  //           }
-  //           if (!found) {
-  //             newBucket.push([curKey, curValue]);
-
-  //           }
+      }
+    }
 
 
-  //         }
-
-  //       }
-  //     }
+  });
 
 };
 
