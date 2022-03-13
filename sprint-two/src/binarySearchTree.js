@@ -38,12 +38,12 @@ BSTMethods.insert = function(value) {
   }
 
 
-  //if (maxDepth(this) > minDepth(this) * 2) {
-  return this.rebalance();
+  if (maxDepth(this) > minDepth(this) * 2) {
+    return this.rebalance();
 
 
 
- // }
+  }
 
 
 };
