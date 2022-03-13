@@ -45,4 +45,17 @@ describe('binarySearchTree', function() {
     var res = binarySearchTree.breadthFirstLog();
     expect(res).to.eql([5, 2, 7, 3]);
   });
+
+  it('rebalance the BST as soon as the maximum depth is more than twice of the min"', function() {
+
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(9);
+
+    var res = binarySearchTree.breadthFirstLog();
+    expect(res).to.eql([7, 5, 8, 6, 9]);
+  });
 });
+
+

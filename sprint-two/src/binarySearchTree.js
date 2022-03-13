@@ -1,6 +1,8 @@
 var BinarySearchTree = function(value) {
 
+
   var tree = {};
+  tree.root = null || this;
   tree.value = value;
   tree.left = null;
   tree.right = null;
@@ -36,9 +38,12 @@ BSTMethods.insert = function(value) {
   }
 
 
-  // if (maxDepth > minDepth * 2) {
-  //   this.rebalance();
-  // }
+  //if (maxDepth(this) > minDepth(this) * 2) {
+  return this.rebalance();
+
+
+
+ // }
 
 
 };
@@ -126,6 +131,92 @@ BSTMethods.breadthFirstLog = function () {
 
 
 };
+
+var minDepth = function(currNode) {
+  if (!currNode) {
+    return 0;
+  }
+  if (!currNode.left && !currNode.right) {
+    return 1;
+  }
+  return 1 + Math.min (this.minDepth(currNode.right), this.minDepth(currNode.left));
+
+};
+
+var maxDepth = function(currNode) {
+  if (!currNode) {
+    return 0;
+  }
+  if (!currNode.left && !currNode.right) {
+    return 1;
+  }
+  return Math.max (this.maxDepth(currNode.left), this.maxDepth(currNode.right));
+
+};
+
+BSTMethods.rebalance = function () {
+  // get all the node value; soted by value;
+  //choose the mid point as root and recursivey rearrange branches.
+
+  var nodeValues = this.breadthFirstLog();
+  nodeValues.sort((a, b) => a - b );
+
+  this.root = sortedValuesToBST(nodeValues);
+  return this.root;
+
+
+
+
+
+};
+
+
+var sortedValuesToBST = function(array) {
+  if (array.length === 0) {
+    return null;
+  }
+  return helper(array, 0, array.length - 1);
+
+};
+
+var helper = function(array, low, high) {
+  if (low > high) {
+    return null;
+  }
+  var mid = Math.floor((low + high) / 2);
+  var node = BinarySearchTree(array[mid]);
+  node.left = helper(array, low, mid - 1);
+  node.right = helper(array, mid + 1, high);
+  return node;
+
+};
+
+
+// var sortedValuesToBST = function(array) {
+//   if (array.length === 0) {
+//     return null;
+//   }
+//   return helper(array, 0, array.length - 1);
+
+//   var helper = function(array, low, high) {
+//     if (low > high) {
+//       return null;
+//     }
+//     var mid = Math.floor((low + high) / 2);
+//     var node = BinarySearchTree(array[mid]);
+//     node.left = helper(array, low, mid - 1);
+//     node.right = helper(array, mid + 1, high);
+//     return node;
+
+//   };
+
+
+
+// };
+
+
+
+
 
 
 
