@@ -37,13 +37,12 @@ describe('binarySearchTree', function() {
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3, 7]);
   });
-  it('should execute a callback on every value in a tree using "breadthFirstLog"', function() {
-    var array = [];
-    var func = function(value) { array.push(value); };
+  it('should log nodes contained in the tree using "breadthFirstLog"', function() {
+
     binarySearchTree.insert(2);
     binarySearchTree.insert(3);
     binarySearchTree.insert(7);
-    binarySearchTree.breadthFirstLog(func);
-    expect(array).to.eql([5, 2, 7, 3]);
+    var res = binarySearchTree.breadthFirstLog();
+    expect(res).to.eql([5, 2, 7, 3]);
   });
 });

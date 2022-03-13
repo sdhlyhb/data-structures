@@ -35,6 +35,12 @@ BSTMethods.insert = function(value) {
     }
   }
 
+
+  // if (maxDepth > minDepth * 2) {
+  //   this.rebalance();
+  // }
+
+
 };
 
 
@@ -98,13 +104,15 @@ e.g
   4,3,8,2,5,7,9;
 this problem can  be solved using queue.
 */
-BSTMethods.breadthFirstLog = function (callback, currNode) {
-  currNode = currNode || this;
+// the function below will log all the nodes value in an array in the BFS traversal order.
+BSTMethods.breadthFirstLog = function () {
+  currNode = this; // start from root;
   var queue = [];
+  var nodeValues = [];
   queue.push(currNode);
   while (queue.length > 0) {
     currNode = queue.shift();
-    callback(currNode.value);
+    nodeValues.push(currNode.value);
     if (currNode.left) {
       queue.push(currNode.left);
     }
@@ -114,15 +122,19 @@ BSTMethods.breadthFirstLog = function (callback, currNode) {
 
 
   }
+  return nodeValues;
 
 
 };
 
 
+
+
 /*
  * Complexity: What is the time complexity of the above functions?
-insert:  O(logn);
-contains: O();
-depthFirstLog: O();
+insert:  O(logN);
+contains: O(logN);
+depthFirstLog: O(N);
+breadthFirstLog: O(N);
 
  */
