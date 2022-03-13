@@ -55,4 +55,17 @@ describe('tree', function() {
 
   });
 
+  it('should disassociate the tree with its parent when removeFromParent is called', function() {
+    tree.addChild(4);
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(7);
+    tree.children[1].addChild(8);
+
+    var removedParentNode = tree.children[1];
+    removedParentNode.children[0].removeFromParent();
+    expect(tree.contains(8)).to.equal(false);
+
+  });
+
 });
